@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PDF preview Generator</title>
+	<style type="text/css">
+		body{
+			background: #f5f5f5;
+		}
+		canvas{
+			display: none;
+		}
+		.pdf_file{
+			width: calc(15% - 16px);
+			border:1px solid #efefef;
+			height: 180px;
+			overflow: hidden;
+			-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+			box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+			background-color: #fff;
+			-webkit-border-radius: 1px;
+			border-radius: 1px;
+			display: inline-block;
+			vertical-align: top;
+			margin-top: 16px;
+			margin-right: 16px;
+			min-width: 150px;
+			max-width: 180px;
+		}
+		.pdf_file img.pre_img{
+			max-width: 100%;
+		}
+
+		.sidebar{
+			width: 300px;
+			float: left;
+		}
+
+		.clearfix:before,
+		.clearfix:after{
+			display: table;
+			content: " ";
+		}
+
+		.clearfix:after{
+			clear: both;
+		}
+
+		.preview_container{
+			float: left;
+			width: calc(100% - 300px);
+		}
+	</style>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script src="vendor/build/pdf.js"></script>
+  	<script src="vendor/build/pdf.worker.js"></script>
+  	<script type="text/javascript">
+  		PDFJS.disableStream = true;
+		function generatePreview(file){
+			PDFJS.getDocument(file).then(function(pdfFile) {
+				var numPage = 1;
+		    	pdfFile.getPage(1).then(function(page) {
+			        var scale = 1;
+	        		var viewport = page.getViewport(scale);
+	        		var canvas = $("<canvas id='canvas'></canvas>");
+	        		$("body").append(canvas);
+	        		canvas = document.getElementById('canvas');
+	        		canvas.width = viewport.width;
+	        		canvas.height = viewport.height;
+					var context = canvas.getContext('2d');
+					var renderContext = {
+					    canvasContext: context,
+					    viewport: viewport
+					};
+					page.render(renderContext).promise.then(function(){
+						function convertCanvasToImage(canvas) {
+					    	var image = $("<img/>");
+					        image.attr("src", canvas.toDataURL("image/jpg"));
+					        return image;
+					    }
+					    var img = convertCanvasToImage(document.getElementById("canvas"))
+					   	(function(img){
+					   		$(".pdf_file").append(img);
+					   	})();
+					    $( "#canvas" ).remove();
+					})
+				});
+			});
+		}
+		// generatePreview('files/a.pdf');
+		setTimeout(function(){
+			// generatePreview('files/b.pdf');
+		}, 500)
+		setTimeout(function(){
+			// generatePreview('files/c.pdf');
+		}, 1000)
+  	</script>
+</head>
+<body>
+	<div class="clearfix">
+		<div class="sidebar">
+			<div>
+				<a href="" class="btn btn-primary"></a>
+			</div>
+		</div>
+		<div class="preview_container">
+			<div class="pdf_file">
+				<img class="pre_img" src="a.png" alt="">
+				<div class="file_details">
+
+				</div>
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+				<!-- <div class="file_details">
+
+				</div> -->
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+				<!-- <div class="file_details">
+
+				</div> -->
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+				<!-- <div class="file_details">
+
+				</div> -->
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+				<!-- <div class="file_details">
+
+				</div> -->
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+				<!-- <div class="file_details">
+
+				</div> -->
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+				<!-- <div class="file_details">
+
+				</div> -->
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+			<div class="pdf_file">
+				<img src="a.png" alt="">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
